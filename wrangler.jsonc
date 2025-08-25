@@ -21,11 +21,49 @@
 	 * databases, object storage, AI inference, real-time communication and more.
 	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
 	 */
+"kv_namespaces": [
+	{
+		"binding": "LANDING_KV",
+		"id": "54828816613244a990f284786ac97e5a",         // fill after `wrangler kv namespace create LANDING_KV`
+		"preview_id": ""  // optional
+	}
+],
+
+"r2_buckets": [
+	{
+		"binding": "LANDING_BUCKET",
+		"bucket_name": "landing-bucket"
+	}
+],
+
+"d1_databases": [
+	{
+		"binding": "LANDING_DB",
+		"database_name": "landing_db",
+		"database_id": "9beb7e5e-1a2a-4364-9299-80a714d2987d" // fill after `wrangler d1 create landing_db`
+	}
+],
+
+"durable_objects": {
+	"bindings": [
+		{
+			"name": "VISIT_COUNTER",
+			"class_name": "VisitCounter"
+		}
+	]
+},
+
+"migrations": [
+	{
+		"tag": "v1",
+		"new_classes": ["VisitCounter"]
+	}
+],
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 	 */
-	// "vars": { "MY_VARIABLE": "production_value" }
+ "vars": { "SITE_TITLE": "Mr. RainbowSmoke - Edge Landing" }
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
