@@ -55,14 +55,14 @@
 "migrations": [
 	{
 		"tag": "v1",
-		"new_sqlite_classes": ["VisitCounter"]
+		"new_classes": ["VisitCounter"]
 	}
 ],
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 	 */
- "vars": { "SITE_TITLE": "Mr. RainbowSmoke - Edge Landing" }
+ "vars": { "SITE_TITLE": "Mr. RainbowSmoke", "CF_ANALYTICS_TOKEN": "REPLACE_WITH_CF_BEACON_TOKEN", "TURNSTILE_SITE_KEY": "0x4AAAAAABu89nBzsOcIWCG5" },
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
@@ -71,7 +71,7 @@
 	 * Static Assets
 	 * https://developers.cloudflare.com/workers/static-assets/binding/
 	 */
-	// "assets": { "directory": "./public/", "binding": "ASSETS" }
+	"assets": { "directory": "./src", "binding": "ASSETS" }
 	/**
 	 * Service Bindings (communicate between multiple Workers)
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
