@@ -165,3 +165,6 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+# Dropbox sidecar attribute files
+*:com.dropbox.attrs
