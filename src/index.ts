@@ -118,6 +118,7 @@ const PAGE_HTML = (title: string) => `<!doctype html>
     $('#r2-msg').textContent = JSON.stringify(j);
   });
 </script>
+<script type="text/javascript" src="https://res.public.onecdn.static.microsoft/customerconnect/v1/7dttl/init.js" id="chatbot" environmentId="6c9a37bc-a1b7-e14e-8f55-85f46c310501" crossorigin="anonymous"></script>
 </html>`;
 
 export default {
