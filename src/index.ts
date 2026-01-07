@@ -472,7 +472,7 @@ const PAGE_HTML = (title: string) => `<!doctype html>
   const showStatus = (element, message, type = 'info') => {
     if (!element) return;
     element.textContent = message;
-    element.className = `status-message status-${type}`;
+    element.className = 'status-message status-' + type;
   };
   
   // Helper function to set loading state
@@ -562,16 +562,16 @@ const PAGE_HTML = (title: string) => `<!doctype html>
       const result = await response.json();
       
       if (result.ok) {
-        showStatus(msgEl, `✅ Flag "${result.key}" set to "${result.value}"`, 'success');
+        showStatus(msgEl, '✅ Flag "' + result.key + '" set to "' + result.value + '"', 'success');
         // Update the flag display in the hero section
         if (result.key === 'feature:beta') {
           $('#flag').textContent = result.value;
         }
       } else {
-        showStatus(msgEl, `❌ Failed to update flag`, 'error');
+        showStatus(msgEl, '❌ Failed to update flag', 'error');
       }
     } catch (error) {
-      showStatus(msgEl, `❌ Network error: ${error.message}`, 'error');
+      showStatus(msgEl, '❌ Network error: ' + error.message, 'error');
     } finally {
       setLoading(button, false);
     }
@@ -599,12 +599,12 @@ const PAGE_HTML = (title: string) => `<!doctype html>
       const result = await response.json();
       
       if (result.ok) {
-        showStatus(msgEl, `✅ File "${result.key}" uploaded successfully!`, 'success');
+        showStatus(msgEl, '✅ File "' + result.key + '" uploaded successfully!', 'success');
       } else {
-        showStatus(msgEl, `❌ Upload failed: ${result.error}`, 'error');
+        showStatus(msgEl, '❌ Upload failed: ' + result.error, 'error');
       }
     } catch (error) {
-      showStatus(msgEl, `❌ Network error: ${error.message}`, 'error');
+      showStatus(msgEl, '❌ Network error: ' + error.message, 'error');
     } finally {
       setLoading(button, false);
     }
@@ -644,14 +644,14 @@ export default {
         return json({ key, value });
       }
       if (req.method === "PUT") {
-        const { key, value } = await req.json();
+        const { key, value } = await req.json() as { key: string; value: string };
         await env.LANDING_KV.put(key, String(value));
         return json({ ok: true, key, value });
       }
     }
 
     if (url.pathname === "/api/signup" && req.method === "POST") {
-      const { email } = await req.json();
+      const { email } = await req.json() as { email: string };
       if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ ok: false, error: "invalid email" }, 400);
       try {
         await env.LANDING_DB.prepare(`INSERT INTO subscribers (email, created_at) VALUES (?1, datetime('now'))`).bind(email).run();
@@ -662,7 +662,7 @@ export default {
     }
 
     if (url.pathname === "/api/r2" && req.method === "PUT") {
-      const { key, content } = await req.json();
+      const { key, content } = await req.json() as { key: string; content: string };
       if (!key) return json({ ok:false, error:"missing key" }, 400);
       await env.LANDING_BUCKET.put(key, new Blob([content ?? ""]));
       return json({ ok:true, key });
