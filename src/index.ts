@@ -531,10 +531,10 @@ const PAGE_HTML = (title: string) => `<!doctype html>
         showStatus(msgEl, '✅ Successfully subscribed to newsletter!', 'success');
         e.target.reset();
       } else {
-        showStatus(msgEl, '❌ Error: ' + result.error, 'error');
+        showStatus(msgEl, `❌ Error: ${result.error}`, 'error');
       }
     } catch (error) {
-      showStatus(msgEl, '❌ Network error: ' + error.message, 'error');
+      showStatus(msgEl, `❌ Network error: ${error.message}`, 'error');
     } finally {
       setLoading(button, false);
     }
